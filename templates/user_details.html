@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Blogly | {{user.full_name}}{% endblock %}
+{% block content %}
+    <img src='{{user.image_url}}' alt='Photo of {{user.full_name}}'>
+    <h1>{{user.first_name}} {{user.last_name}}</h1>
+    <form action='/users/{{user.id}}/edit'>
+        <button>Edit</button>
+    </form>
+    <form action='/users/{{user.id}}/delete' method='POST'>
+        <button>Delete</button>
+    </form>
+    <h2>Posts</h2>
+    <ul>
+    {% for post in user.posts %}
+    <li><a href='/posts/{{post.id}}'>{{post.title}}</a></li>
+    {% endfor %}
+    </ul>
+    <a href='/users/{{user.id}}/posts/new'>Add Post</a>
+{% endblock %}
